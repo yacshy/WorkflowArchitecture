@@ -419,13 +419,55 @@ Its purpose is not to execute business logic, but to provide a stable semantic b
 
 #### 3.3 Definition
 
-A Workflow is the architectural boundary of a relatively complete business process.
+A Workflow is the architectural boundary of one complete business evolution.
+
+A business evolution begins with one stable business State and terminates at another stable business State.
 
 A Workflow owns exactly one StateMachine.
 
 A Workflow is identified by its business semantics rather than its implementation.
 
 A Workflow is an organizational concept rather than an execution mechanism.
+
+---
+
+#### 3.3.1 Workflow Naming
+
+A Workflow name SHALL describe one complete business evolution.
+
+The canonical naming form is:
+
+`<InitialBusinessState>To<TerminalBusinessState>`
+
+where:
+
+- InitialBusinessState represents the stable business fact at which the Workflow begins.
+- TerminalBusinessState represents the stable business fact produced when the Workflow completes.
+
+The name SHALL describe business evolution rather than business domain, software module or UI structure.
+
+Examples:
+
+TaskDraftToTaskReady
+LayerSelectedToVisibilityCalculated
+GoalSelectedToGoalDeleted
+GoalSelectedToGoalUpdated
+AttachmentReadyToAttachmentUploaded
+
+Counter Examples:
+
+GoalManagement
+TaskModule
+LayerPanel
+GoalFeature
+
+These names describe software organization, modules or UI structures rather than business evolution.
+
+GoalManagementWorkflow
+TaskManagementWorkflow
+LayerManagementWorkflow
+
+These names describe business domains or software modules rather than complete business evolution.
 
 ---
 
@@ -2108,6 +2150,30 @@ Each branch begins a new Workflow.
 ##### Step 6
 
 Repeat this process recursively for every newly discovered Workflow until no irreversible branches remain.
+
+---
+
+##### Step 7
+
+Determine the semantic name of the derived Workflow.
+
+The Workflow name SHALL express the complete business evolution represented by the Workflow.
+
+Whenever practical, the canonical form SHALL be:
+
+`<InitialBusinessState>To<TerminalBusinessState>`
+
+The chosen name MUST remain independent of:
+
+- UI structure
+- feature grouping
+- software modules
+- API boundaries
+- implementation details
+
+The resulting Workflow name SHALL uniquely identify one business evolution.
+
+The Workflow name is a consequence of the derivation process rather than an independent design decision.
 
 ---
 
@@ -4087,13 +4153,33 @@ The following naming rules are normative.
 
 Workflow directories SHALL use PascalCase.
 
-The directory name SHALL describe the business process represented by the Workflow.
+The directory name SHALL describe the complete business evolution represented by the Workflow.
 
-Example:
+Whenever practical, Workflow names SHALL follow the canonical form:
 
-```text
+`<InitialBusinessState>To<TerminalBusinessState>`
+
+Examples:
+
 TaskDraftToTaskReady
-```
+GoalSelectedToGoalUpdated
+GoalSelectedToGoalDeleted
+AttachmentReadyToAttachmentUploaded
+
+Counter Examples:
+
+TaskManagement
+GoalManagement
+TaskPanel
+LayerFeature
+
+These names describe domains, modules or UI structures rather than business evolution.
+
+GoalManagementWorkflow
+TaskManagementWorkflow
+LayerManagementWorkflow
+
+These names describe business domains or software modules rather than complete business evolution.
 
 ---
 
