@@ -37,8 +37,8 @@ class ConfigService {
 
     this.config = {
       ollamaBaseUrl: env.OLLAMA_BASE_URL || "http://localhost:11434",
-      ollamaModel: env.OLLAMA_MODEL || "qwen2.5:7b",
-      port: parseInt(env.PORT || "3000", 10),
+      ollamaModel: env.OLLAMA_MODEL,
+      port: parseInt(env.PORT, 10),
       handbookPath: path.resolve(__dirname, "../", env.HANDBOOK_PATH),
       referencePath: path.resolve(__dirname, "../", env.REFERENCE_PATH),
       casesDir: path.resolve(__dirname, "../", env.CASES_DIR),
